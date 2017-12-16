@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TicTacToe only by object manipulation instead of reprinting the content of whole grid.</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="stylesheet.css">
+        <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet"> 
+    </head>
+    <body>
+        <div id="gameStatus">Welcome to TicTacToe!</div>
+        <div id="tictactoe">
+            <div class="gameGrid">
+                <div class="gameRow" data-row-id="0">
+                    <div class="gameCell" data-cell-id="0">&nbsp;</div>
+                    <div class="gameCell" data-cell-id="1">&nbsp;</div>
+                    <div class="gameCell" data-cell-id="2">&nbsp;</div>
+                </div>
+                <div class="gameRow" data-row-id="1">
+                    <div class="gameCell" data-cell-id="0">&nbsp;</div>
+                    <div class="gameCell" data-cell-id="1">&nbsp;</div>
+                    <div class="gameCell" data-cell-id="2">&nbsp;</div>
+                </div>
+                <div class="gameRow" data-row-id="2">
+                    <div class="gameCell" data-cell-id="0">&nbsp;</div>
+                    <div class="gameCell" data-cell-id="1">&nbsp;</div>
+                    <div class="gameCell" data-cell-id="2">&nbsp;</div>
+                </div>
+            </div>
+            <div id="gameRestart">
+                <button type="button" id="restartButton">Restart the game!</button>
+            </div>
+        </div>
+        <script src="game.js"></script>
+    </body>
+</html>

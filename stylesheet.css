@@ -1,0 +1,43 @@
+#gameStatus {
+    font-family: 'Pacifico', cursive;
+    font-size: 40px;
+    margin: auto;
+    text-align: center;
+}
+
+#tictactoe {
+    margin: auto;
+    padding: 0;
+    width: 300px;
+    height: 300px;
+}
+
+#gameRestart {
+    text-align: center;
+    margin: 10px;
+}
+
+.gameGrid {
+    font-family: 'Roboto Mono', monospace;
+    display: table;
+    border-collapse: collapse;
+}
+
+.gameRow {
+    display: table-row;
+}
+
+.gameCell {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    width: 100px;
+    height: 100px;
+    box-sizing: content-box;
+    border: 5px solid #000;
+    font-size: 70px;
+}
+
+.gameCell.winning {
+    background-color: #ff0;
+}
