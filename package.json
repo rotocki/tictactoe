@@ -1,0 +1,26 @@
+{
+  "name": "tictactoe",
+  "version": "1.0.0",
+  "description": "First attempt after going through Codecademy free courses to create a JavaScript application manipulating elements in the document.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel --preset env src/ -d app/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rotocki/tictactoe.git"
+  },
+  "author": "rotocki",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rotocki/tictactoe/issues"
+  },
+  "homepage": "https://github.com/rotocki/tictactoe#readme",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "express": "^4.16.2",
+    "serve-static": "^1.13.1"
+  }
+}
