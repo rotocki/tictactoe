@@ -5,6 +5,13 @@
     text-align: center;
 }
 
+#gameProgress {
+    font-family: 'Pacifico', cursive;
+    font-size: 30px;
+    margin: auto;
+    text-align: center;
+}
+
 #tictactoe {
     margin: auto;
     padding: 0;

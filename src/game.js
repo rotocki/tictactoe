@@ -100,12 +100,12 @@ function checkIfSomeoneWon() {
         const answer = answers[answerIdx];
         if (answer.content.indexOf('XXX') !== -1) {
             highlightWinningCells(answer);
-            alert("X's win");
+            document.getElementById('gameProgress').textContent = "X's won!";
             return true;
         }
         if (answer.content.indexOf('OOO') !== -1) {
             highlightWinningCells(answer);
-            alert("O's win");
+            document.getElementById('gameProgress').textContent = "O's won!";
             return true;
         }
     }
@@ -121,46 +121,57 @@ function clearGameCells() {
             gameCell.className = 'gameCell';
         }
     }
+    document.getElementById('gameProgress').textContent = 'Game in progress...';
+}
+
+function mainEventLoop(event, gameState) {
+    //console.log(event.target);
+    const targetElement = event.target;
+
+    if (targetElement.type === 'button') {
+        if (targetElement.id === 'restartButton') {
+            clearGameCells();
+            gameState.fieldsNotSelected = 9;
+            gameState.characterSign = 'X';
+            gameState.gameFinished = false;
+            return;
+        }
+    }
+
+    if (gameState.gameFinished) {
+        return;
+    }
+
+    const currentTextContent = event.target.textContent;
+    if ((currentTextContent !== 'X') && (currentTextContent !== 'O')) {
+        event.target.textContent = gameState.characterSign;
+        gameState.characterSign = (gameState.characterSign === 'X') ? 'O' : 'X';
+        gameState.fieldsNotSelected--;
+        
+        if (checkIfSomeoneWon()) {
+            gameState.gameFinished = true;
+            return;
+        }
+    }
+
+    if (gameState.fieldsNotSelected === 0) {
+        document.getElementById('gameProgress').textContent = "Draw!";
+    }
 }
 
 function startGame() {
-    let fieldsNotSelected = 9;
-    let gameFinished = false;
-    let characterSign = 'X';
+    const gameState = {
+        fieldsNotSelected: 9,
+        gameFinished: false,
+        characterSign: 'X'
+    }
 
     document.getElementById('tictactoe').addEventListener('click', function (event) {
-        //console.log(event.target);
-        const targetElement = event.target;
-
-        if (targetElement.type === 'button') {
-            if (targetElement.id === 'restartButton') {
-                clearGameCells();
-                fieldsNotSelected = 9;
-                characterSign = 'X';
-                gameFinished = false;
-                return;
-            }
-        }
-
-        if (gameFinished) {
-            return;
-        }
-
-        const currentTextContent = event.target.textContent;
-        if ((currentTextContent !== 'X') && (currentTextContent !== 'O')) {
-            event.target.textContent = characterSign;
-            characterSign = (characterSign === 'X') ? 'O' : 'X';
-            fieldsNotSelected--;
-            
-            if (checkIfSomeoneWon()) {
-                gameFinished = true;
-                return;
-            }
-        }
-
-        if (fieldsNotSelected === 0) {
-            alert('Draw!');
-        }
+        mainEventLoop(event, gameState)
+    }, false);
+    document.getElementById('tictactoe').addEventListener('touchend', function (event) {
+        event.preventDefault();
+        mainEventLoop(event, gameState);
     }, false);
 }
 
