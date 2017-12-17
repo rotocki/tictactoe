@@ -1,15 +1,15 @@
 'use strict';
 
 function readGameGridFromDocument() {
-    let rows = document.getElementsByClassName('gameRow');
+    const rows = document.getElementsByClassName('gameRow');
 
     let gameGrid = [];
     for (let rowIdx = 0; rowIdx < rows.length; rowIdx++) {
-        let row = rows[rowIdx];
+        const row = rows[rowIdx];
         let cells = row.children;
         let gameGridRow = [];
         for (let cellIdx = 0; cellIdx < cells.length; cellIdx++) {
-            let cell = cells[cellIdx];
+            const cell = cells[cellIdx];
             gameGridRow.push({
                 row: row.dataset['rowId'], 
                 column: cell.dataset['cellId'], 
@@ -25,11 +25,11 @@ function readGameGridFromDocument() {
 function getHorizontalAnswers(grid) {
     let horizontalAnswers = [];
     for (let rowIdx = 0; rowIdx < grid.length; rowIdx++) {
-        let row = grid[rowIdx];
+        const row = grid[rowIdx];
         let answer = '';
         let indicesOfFields = [];
         for (let cellIdx = 0; cellIdx < row.length; cellIdx++) {
-            let cell = row[cellIdx];
+            const cell = row[cellIdx];
             answer += cell.content;
             indicesOfFields.push([cell.row, cell.column]);
         }
@@ -45,9 +45,9 @@ function getVerticalAnswers(grid) {
         {content: '', indices: []}
     ];
     for (let rowIdx = 0; rowIdx < grid.length; rowIdx++) {
-        let row = grid[rowIdx];
-        for (const cellIdx in row) {
-            let cell = row[cellIdx];
+        const row = grid[rowIdx];
+        for (let cellIdx = 0; cellIdx < row.length; cellIdx++) {
+            const cell = row[cellIdx];
             verticalAnswers[cellIdx].content += cell.content;
             verticalAnswers[cellIdx].indices.push([cell.row, cell.column]);
         }
@@ -59,11 +59,11 @@ function getDiagonalAnswers(grid) {
     let diagonalIterationOrder = [[[0, 0], [1, 1], [2, 2]], [[2, 0], [1, 1], [0, 2]]];
     let diagonalAnswers = [];
     for (let iterationOrderIdx = 0; iterationOrderIdx < diagonalIterationOrder.length; iterationOrderIdx++) {
-        let iterationOrder = diagonalIterationOrder[iterationOrderIdx];
+        const iterationOrder = diagonalIterationOrder[iterationOrderIdx];
         let answer = '';
         let indicesOfFields = [];
-        for (const cellLocationIdx in iterationOrder) {
-            let cellLocation = iterationOrder[cellLocationIdx];
+        for (let cellLocationIdx = 0 ; cellLocationIdx < iterationOrder.length; cellLocationIdx++) {
+            const cellLocation = iterationOrder[cellLocationIdx];
             const rowIdx = cellLocation[0];
             const columnIdx = cellLocation[1];
             const cell = grid[rowIdx][columnIdx];
@@ -83,10 +83,10 @@ function getAllAnswers(grid) {
 }
 
 function highlightWinningCells(answer) {
-    let rows = document.getElementsByClassName('gameRow');
-    let allIndices = answer.indices;
+    const rows = document.getElementsByClassName('gameRow');
+    const allIndices = answer.indices;
     for (let indicesIdx = 0; indicesIdx < allIndices.length; indicesIdx++) {
-        let indices = allIndices[indicesIdx];
+        const indices = allIndices[indicesIdx];
         let x = indices[0];
         let y = indices[1];
         rows[x].children[y].className += ' winning';
@@ -94,10 +94,10 @@ function highlightWinningCells(answer) {
 }
 
 function checkIfSomeoneWon() {
-    let grid = readGameGridFromDocument();
-    let answers = getAllAnswers(grid);
+    const grid = readGameGridFromDocument();
+    const answers = getAllAnswers(grid);
     for (let answerIdx = 0; answerIdx < answers.length; answerIdx++) {
-        let answer = answers[answerIdx];
+        const answer = answers[answerIdx];
         if (answer.content.indexOf('XXX') !== -1) {
             highlightWinningCells(answer);
             alert("X's win");
@@ -113,9 +113,9 @@ function checkIfSomeoneWon() {
 }
 
 function clearGameCells() {
-    let gameCells = document.getElementsByClassName('gameCell');
+    const gameCells = document.getElementsByClassName('gameCell');
     for (let gameCellIdx = 0; gameCellIdx < gameCells.length; gameCellIdx++) {
-        let gameCell = gameCells[gameCellIdx];
+        const gameCell = gameCells[gameCellIdx];
         gameCell.innerHTML = '&nbsp;';
         if (gameCell.className === 'gameCell winning') {
             gameCell.className = 'gameCell';
