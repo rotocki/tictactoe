@@ -62,7 +62,7 @@ function getDiagonalAnswers(grid) {
         const iterationOrder = diagonalIterationOrder[iterationOrderIdx];
         let answer = '';
         let indicesOfFields = [];
-        for (let cellLocationIdx = 0 ; cellLocationIdx < iterationOrder.length; cellLocationIdx++) {
+        for (let cellLocationIdx = 0; cellLocationIdx < iterationOrder.length; cellLocationIdx++) {
             const cellLocation = iterationOrder[cellLocationIdx];
             const rowIdx = cellLocation[0];
             const columnIdx = cellLocation[1];
@@ -100,12 +100,12 @@ function checkIfSomeoneWon() {
         const answer = answers[answerIdx];
         if (answer.content.indexOf('XXX') !== -1) {
             highlightWinningCells(answer);
-            document.getElementById('gameProgress').textContent = "X's won!";
+            document.getElementById('gameProgress').textContent = 'X\'s won!';
             return true;
         }
         if (answer.content.indexOf('OOO') !== -1) {
             highlightWinningCells(answer);
-            document.getElementById('gameProgress').textContent = "O's won!";
+            document.getElementById('gameProgress').textContent = 'O\'s won!';
             return true;
         }
     }
@@ -155,7 +155,7 @@ function mainEventLoop(event, gameState) {
     }
 
     if (gameState.fieldsNotSelected === 0) {
-        document.getElementById('gameProgress').textContent = "Draw!";
+        document.getElementById('gameProgress').textContent = 'Draw!';
     }
 }
 
@@ -164,10 +164,10 @@ function startGame() {
         fieldsNotSelected: 9,
         gameFinished: false,
         characterSign: 'X'
-    }
+    };
 
     document.getElementById('tictactoe').addEventListener('click', function (event) {
-        mainEventLoop(event, gameState)
+        mainEventLoop(event, gameState);
     }, false);
     document.getElementById('tictactoe').addEventListener('touchend', function (event) {
         event.preventDefault();
