@@ -4,10 +4,12 @@ function readGameGridFromDocument() {
     let rows = document.getElementsByClassName('gameRow');
 
     let gameGrid = [];
-    for (const row of rows) {
+    for (let rowIdx = 0; rowIdx < rows.length; rowIdx++) {
+        let row = rows[rowIdx];
         let cells = row.children;
         let gameGridRow = [];
-        for (const cell of cells) {
+        for (let cellIdx = 0; cellIdx < cells.length; cellIdx++) {
+            let cell = cells[cellIdx];
             gameGridRow.push({
                 row: row.dataset['rowId'], 
                 column: cell.dataset['cellId'], 
@@ -22,10 +24,12 @@ function readGameGridFromDocument() {
 
 function getHorizontalAnswers(grid) {
     let horizontalAnswers = [];
-    for (const row of grid) {
+    for (let rowIdx = 0; rowIdx < grid.length; rowIdx++) {
+        let row = grid[rowIdx];
         let answer = '';
         let indicesOfFields = [];
-        for (const cell of row) {
+        for (let cellIdx = 0; cellIdx < row.length; cellIdx++) {
+            let cell = row[cellIdx];
             answer += cell.content;
             indicesOfFields.push([cell.row, cell.column]);
         }
@@ -40,7 +44,8 @@ function getVerticalAnswers(grid) {
         {content: '', indices: []}, 
         {content: '', indices: []}
     ];
-    for (const row of grid) {
+    for (let rowIdx = 0; rowIdx < grid.length; rowIdx++) {
+        let row = grid[rowIdx];
         for (const cellIdx in row) {
             let cell = row[cellIdx];
             verticalAnswers[cellIdx].content += cell.content;
@@ -53,10 +58,12 @@ function getVerticalAnswers(grid) {
 function getDiagonalAnswers(grid) {
     let diagonalIterationOrder = [[[0, 0], [1, 1], [2, 2]], [[2, 0], [1, 1], [0, 2]]];
     let diagonalAnswers = [];
-    for (const iterationOrder of diagonalIterationOrder) {
+    for (let iterationOrderIdx = 0; iterationOrderIdx < diagonalIterationOrder.length; iterationOrderIdx++) {
+        let iterationOrder = diagonalIterationOrder[iterationOrderIdx];
         let answer = '';
         let indicesOfFields = [];
-        for (const cellLocation of iterationOrder) {
+        for (const cellLocationIdx in iterationOrder) {
+            let cellLocation = iterationOrder[cellLocationIdx];
             const rowIdx = cellLocation[0];
             const columnIdx = cellLocation[1];
             const cell = grid[rowIdx][columnIdx];
@@ -77,7 +84,9 @@ function getAllAnswers(grid) {
 
 function highlightWinningCells(answer) {
     let rows = document.getElementsByClassName('gameRow');
-    for (const indices of answer.indices) {
+    let allIndices = answer.indices;
+    for (let indicesIdx = 0; indicesIdx < allIndices.length; indicesIdx++) {
+        let indices = allIndices[indicesIdx];
         let x = indices[0];
         let y = indices[1];
         rows[x].children[y].className += ' winning';
@@ -87,7 +96,8 @@ function highlightWinningCells(answer) {
 function checkIfSomeoneWon() {
     let grid = readGameGridFromDocument();
     let answers = getAllAnswers(grid);
-    for (const answer of answers) {
+    for (let answerIdx = 0; answerIdx < answers.length; answerIdx++) {
+        let answer = answers[answerIdx];
         if (answer.content.indexOf('XXX') !== -1) {
             highlightWinningCells(answer);
             alert("X's win");
@@ -104,7 +114,8 @@ function checkIfSomeoneWon() {
 
 function clearGameCells() {
     let gameCells = document.getElementsByClassName('gameCell');
-    for (const gameCell of gameCells) {
+    for (let gameCellIdx = 0; gameCellIdx < gameCells.length; gameCellIdx++) {
+        let gameCell = gameCells[gameCellIdx];
         gameCell.innerHTML = '&nbsp;';
         if (gameCell.className === 'gameCell winning') {
             gameCell.className = 'gameCell';
